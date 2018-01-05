@@ -72,7 +72,8 @@ def to_article_info(article):
     if len(article.info) > config.article_introduction_length:
         info = article.info[0:config.article_introduction_length - 3] + '...'
     article_temp = Article(id=article.id, title=article.title, info=info, label_id=article.label_id,
-                           author_id=article.author_id)
+                           author_id=article.author_id, good_count=article.good_count, create_time=article.create_time,
+                           modify_time=article.modify_time, click_count=article.click_count)
     return article_temp
 
 

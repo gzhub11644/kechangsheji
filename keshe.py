@@ -159,6 +159,8 @@ def article(article_id):
     if not article_model:
         page_content['error'] = u'文章不存在!'
         return render_template('error.html', **page_content)
+    article_model.click_count += 1
+    db.session.commit()
     page_content['article'] = article_model
     page_content['content'] = article_model.content
     page = request.args.get('page', 1, type=int)
@@ -304,6 +306,7 @@ def content_main():
     return redirect(url_for('content', label_id=0))
 
 
+# 获取标签下的文章列表
 @app.route('/content/<label_id>')
 def content(label_id=0):
     page_content = get_page_content()
@@ -357,6 +360,7 @@ def content(label_id=0):
     return render_template('content.html', **page_content)
 
 
+# 管理员页面，标签管理
 @app.route('/admin')
 @login_required
 @admin_required
@@ -369,6 +373,7 @@ def admin():
     return render_template('admin/index.html', **page_content)
 
 
+# 管理员页面，标签编辑
 @app.route('/label/edit/<label_id>', methods=['GET', 'POST'])
 @login_required
 @admin_required
@@ -402,6 +407,7 @@ def label_edit(label_id):
         return redirect(url_for('admin'))
 
 
+# 管理员页面，标签添加
 @app.route('/label/add', methods=['GET', 'POST'])
 @login_required
 @admin_required
@@ -430,6 +436,7 @@ def label_add():
         return redirect(url_for('admin'))
 
 
+# 管理员页面，标签删除
 @app.route('/label/delete/<label_id>')
 @login_required
 @admin_required

@@ -21,7 +21,7 @@ SALT = 'huangdy8745tongyongquan'
 session_lifetime = 5
 
 # 验证码列型   0 英文   1 中文
-captcha_type = 0
+captcha_type = 1
 
 # 验证码过期时间 分钟
 captcha_time = 2
